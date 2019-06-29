@@ -78,4 +78,16 @@ class User extends Authenticatable
      }
      return false;
     }
+
+    public function room()
+    {
+        return $this
+            ->belongsTo('App\Room')
+            ->withTimestamps();
+            
+    }
+
+
+
+
 }

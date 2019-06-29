@@ -11,11 +11,13 @@ class UserTableSeeder extends Seeder
         $role_admin = Role::where('nombre', 'admin')->first();
         $user = new User();
         $user->name = 'Juan';
+        $user->room_id = "1";
         $user->email = 'jmberrone@gmail.com';
         $user->password = bcrypt('secret');
         $user->save();
         $user->roles()->attach($role_user);
         $user = new User();
+        $user->room_id = "1";
         $user->name = 'Lourdes';
         $user->email = 'Lourdes@gmail.com';
         $user->password = bcrypt('secret');

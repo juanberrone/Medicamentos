@@ -15,6 +15,8 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('region_id')->unsigned();
+            $table->foreign('region_id')->references('id')->on('regions');
             $table->string('nombre');
             $table->string('direccion');
             $table->string('telefono');
@@ -24,8 +26,9 @@ class CreateRoomsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
+          * @return void*
+
+
      */
     public function down()
     {

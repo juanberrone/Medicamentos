@@ -9,7 +9,7 @@ class Movement extends Model
     
 	protected $fillable = [
 
-       'remito', 'autor', 'estado', 'observaciones', 'tipo',
+       'remito', 'autor', 'estado', 'observaciones', 'tipo', 'room_id', 
     ];
 
 

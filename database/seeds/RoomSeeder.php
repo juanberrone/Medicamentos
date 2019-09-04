@@ -16,6 +16,7 @@ class RoomSeeder extends Seeder
         //
 
         $room = new Room();
+        $room->region_id = '1';
         $room->nombre = 'Sala Central ';
         $room->direccion = 'OFICINA CENTRAL';
 		$room->telefono = '5546546';

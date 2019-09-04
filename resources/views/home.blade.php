@@ -7,29 +7,33 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="bootstrap/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  
+
+  <link rel="stylesheet" href={{ asset('bootstrap/bower_components/bootstrap/dist/css/bootstrap.min.css') }}>
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="bootstrap/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href={{ asset('bootstrap/bower_components/font-awesome/css/font-awesome.min.css') }}>
   <!-- Ionicons -->
-  <link rel="stylesheet" href="bootstrap/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href={{ asset('bootstrap/bower_components/Ionicons/css/ionicons.min.css') }}>
   <!-- jvectormap -->
-  <link rel="stylesheet" href="bootstrap/bower_components/jvectormap/jquery-jvectormap.css">
+  <link rel="stylesheet" href={{ asset('bootstrap/bower_components/jvectormap/jquery-jvectormap.css') }}>
   <!-- Theme style -->
-  <link rel="stylesheet" href="bootstrap/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href={{ asset('bootstrap/dist/css/AdminLTE.min.css') }}>
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="bootstrap/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href={{ asset('bootstrap/dist/css/skins/_all-skins.min.css') }}>
+
+  <link rel="stylesheet" href={{ asset('bootstrap/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+  <![endif]--
 
   <!-- Google Font -->
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        href={{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic') }}>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -41,9 +45,9 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
      
       
-      <span class="logo-mini">I</span>
+      <span class="logo-mini">Med</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">INMUNOLOGIA</span>
+      <span class="logo-lg">Medicamentos</span>
 
 
     </a>
@@ -149,25 +153,60 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Funcionalidad</li>
         
-@if (Auth::check())
-                @if ($perfil == 'admin' )
+
        
-<li class="active treeview menu-open">
+      <li class="treeview">
           <a href="#">
-            <i class="fa fa-home"></i> <span>Inicio</span>
+            <i class="fa fa-home"></i> <span>Salas</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
+            <ul class="treeview-menu">
 
-            <li><a href="{{ route('product.index') }}"> <i class="fa fa-circle-o"></i> Index</a></li>
-            <li class="active"><a href="{{ route('logout') }}"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            @foreach ($salas as $sala)
+    
+               <li ><a href="{{  url('sala/'. $sala->id) }}"><i class="fa fa-circle-o"></i>{{ $sala->nombre }}</a></li>
+
+   
+              @endforeach
+
           </ul>
         </li>
-                @endif
- @endif
 
+
+ @if (Auth::check())
+                @if ($perfil == 'admin' )   
+
+          <li class="treeview">
+           <a href="#">
+            <i class="fa fa-plus-square"></i> <span>Ingresos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+            <ul class="treeview-menu">
+               <li><a href="{{ route('product.index') }}"> <i class="fa fa-circle-o"></i> Alta Productos </a></li>
+                <li><a href="{{ route('product.index') }}"> <i class="fa fa-circle-o"></i> Alta Stocks </a></li>
+            </ul>
+           
+        </li>
+
+
+        <li class="treeview">
+           <a href="#">
+            <i class="fa fa-plus-square"></i> <span>Movimientos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+            <ul class="treeview-menu">
+               <li><a href="{{ route('movement.index') }}"> <i class="fa fa-circle-o"></i> Generar Movimientos </a></li>
+            </ul>
+        </li>
+ 
+      @endif
+            @endif
 
       </ul>
     </section>
@@ -202,6 +241,7 @@
 
                <div class="col-md-12 col-sm-12 col-xs-12">
                 @yield('index-content')
+                @yield('script')
               </div>  
            </div>
 
@@ -215,36 +255,45 @@
 
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
+      <b>Version</b> 1.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+    <strong>Copyright &copy; 2019 <a href="https://adminlte.io">Municipalidad de Bahia Blanca</a>.</strong> Todos los derechos Reservadors.
   </footer>
 
 </div>
 
 </body>
 
+<link rel="stylesheet" href={{ asset('bootstrap/bower_components/jquery/dist/jquery.min.js') }}>
+
 <!-- jQuery 3 -->
-<script src="bootstrap/bower_components/jquery/dist/jquery.min.js"></script>
+<script src={{ asset('bootstrap/bower_components/jquery/dist/jquery.min.js') }}></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bootstrap/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src={{ asset('bootstrap/bower_components/bootstrap/dist/js/bootstrap.min.js') }}></script>
 <!-- FastClick -->
-<script src="bootstrap/bower_components/fastclick/lib/fastclick.js"></script>
+<script src={{ asset('bootstrap/bower_components/fastclick/lib/fastclick.js') }}></script>
 <!-- AdminLTE App -->
-<script src="bootstrap/dist/js/adminlte.min.js"></script>
+<script src={{ asset('bootstrap/dist/js/adminlte.min.js') }}></script>
 <!-- Sparkline -->
-<script src="bootstrap/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<script src={{ asset('bootstrap/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}></script>
 <!-- jvectormap  -->
-<script src="bootstrap/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="bootstrap/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src={{ asset('bootstrap/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}></script>
+<script src={{ asset('bootstrap/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}></script>
 <!-- SlimScroll -->
-<script src="bootstrap/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src={{ asset('bootstrap/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}></script>
 <!-- ChartJS -->
-<script src="bootstrap/bower_components/chart.js/Chart.js"></script>
+<script src={{ asset('bootstrap/bower_components/chart.js/Chart.js') }}></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="bootstrap/dist/js/pages/dashboard2.js"></script>
+<script src={{ asset('bootstrap/dist/js/pages/dashboard2.js') }}></script>
 <!-- AdminLTE for demo purposes -->
-<script src="bootstrap/dist/js/demo.js"></script>
+<script src={{ asset('bootstrap/dist/js/demo.js') }}></script>
+
+<script src={{ asset('bootstrap/bower_components/datatables.net/js/jquery.dataTables.min.js') }}></script>
+<script src={{ asset('bootstrap/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}></script>
+
+
+
+
+
 
 </html>

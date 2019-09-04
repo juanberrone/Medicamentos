@@ -17,6 +17,14 @@
 
   <section class="content">
 
+     <div class="row">
+    <div id="app" class="col-lg-8 col-xs-8">
+        @include('flash-message')
+
+
+        @yield('content')
+    </div>
+</div>
 
 
       <div class="panel panel-default">
@@ -77,7 +85,7 @@
     
     </div>
 
-     <div id="imagenStock"  class="panel panel-default" style="min-width: 310px; height: 400px; margin: 0 auto">
+     <div id="imagenStock"  style="min-width: 310px; height: 400px; margin: 0 auto">
        
 
      </div>
@@ -100,7 +108,6 @@ $(document).ready(function() {
    
 
      $('#stockTable').dataTable( {
-
 
 
         "columnDefs": [
@@ -129,10 +136,27 @@ $(document).ready(function() {
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
      
 
-       if ( aData[6] <= aData[8] )
+
+      var almacen = parseInt(aData[6]);
+      var minimoAceptable = parseInt(aData[8]);
+     // alert(menor);
+   
+       if ( almacen <= minimoAceptable )
       {
-        $('td', nRow).css('background-color', '#f2dede' );
-      }
+         if ( almacen == 0) {
+              $('td', nRow).css('background-color', '#f2dede' );
+         
+
+            }
+        else{
+
+             $('td', nRow).css('background-color', '#ffff9e' );
+               
+        }
+
+       
+
+       }
       else 
       {
         $('td', nRow).css('background-color', '#dff0d8');
@@ -141,71 +165,7 @@ $(document).ready(function() {
     }
   } );
 
-
-     Highcharts.chart('imagenStock', {
-    chart: {
-        zoomType: 'xy'
-    },
-    title: {
-        text: 'Almacen {{$sala->nombre}} '
-    },
-    subtitle: {
-        text: '{{$sala->direccion}}'
-    },
-    xAxis: [{
-        categories: ['SBN01', 'QUINT01', 'ANVA01', 'SEX01', 'SEX01', 'BCG001',
-            'HPV01', 'TRBA01', 'HEPBPE01', 'HEPBAD01', 'HEPA01', 'PREV13'],
-        crosshair: true
-    }],
-    yAxis: [{ // Primary yAxis
-        
-        title: {
-            text: 'Cantidad',
-            style: {
-                color: Highcharts.getOptions().colors[1]
-            }
-        }
-    }, { // Secondary yAxis
-       
-        labels: {
-          
-        },
-        opposite: true
-    }],
-    tooltip: {
-        shared: true
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'left',
-        x: 120,
-        verticalAlign: 'top',
-        y: 100,
-        floating: true,
-        backgroundColor:
-            Highcharts.defaultOptions.legend.backgroundColor || // theme
-            'rgba(255,255,255,0.25)'
-    },
-    series: [{
-        name: 'Cantidad',
-        type: 'column',
-        yAxis: 1,
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
-        tooltip: {
-           
-        }
-
-    }, {
-        name: 'Alerta Minima',
-        type: 'spline',
-        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
-        tooltip: {
-           
-        }
-    }]
 });
-    
-} );
         </script>
 
   

@@ -25,10 +25,19 @@ class ProductController extends Controller
         //var_dump($user1->role_id);
         $user1 = DB::table('roles')->where('id', $user1->role_id )->first();
         $perfil = $user1->nombre;
-        var_dump($perfil);
+        //var_dump($user1);
 
-        $productos=Product::orderBy('id','DESC')->paginate(3);
-        return view('Product.index',compact("productos","perfil"));
+        $productos=Product::orderBy('id','DESC')->paginate(10);
+
+        $salas = DB::table('room_user')->where('user_id', $user->id )
+                 ->join('rooms', 'room_user.room_id', '=', 'rooms.id')
+                 ->select('rooms.*')
+                 ->get();
+
+
+
+
+        return view('Product.index',compact("productos","perfil","salas"));
     }
 
     /**
@@ -36,11 +45,30 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
 
-        return view('Product.create');
+
+        $request->user()->authorizeRoles(['user', 'admin']);
+        $user = Auth::user();
+        $user1 = DB::table('role_user')->where('user_id', $user->id )->first();
+        //var_dump($user1->role_id);
+        $user1 = DB::table('roles')->where('id', $user1->role_id )->first();
+        $perfil = $user1->nombre;
+       
+
+    
+        //
+         $productos=Product::orderBy('id','DESC')->paginate(3);
+
+         $salas = DB::table('room_user')->where('user_id', $user->id )
+                 ->join('rooms', 'room_user.room_id', '=', 'rooms.id')
+                 ->select('rooms.*')
+                 ->get();
+
+
+        return view('Product.create',compact("productos","perfil","salas"));
+    
     }
 
     /**
@@ -51,7 +79,34 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+         
+         if (  $request->input('requiereDescartable') == "on"){
+                 $requiereDescartable=1;
+         }
+         else{
+
+         $requiereDescartable=0;
+         }
+
+        
+         print_r($requiereDescartable);
+
+         $producto = new Product([
+        'nombre' => $request->input('nombre'),
+        'codigo' => $request->input('codigo'),
+        'unidad' => $request->input('unidad'),
+        'requiereDescartable' => $requiereDescartable,
+        'dosis' => $request->input('dosis'),
+        'descartables' => $request->input('descartables')
+      ]);
+        $producto->save();
+
+        return redirect()->route('product.index');
+
+
+
+
     }
 
     /**

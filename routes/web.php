@@ -23,4 +23,20 @@ Route::get('profile', 'UserController@profile');
 
 Route::post('profile', 'UserController@update_avatar')->middleware('auth')->name('profile.update');
 
+Route::post('/app/room/store', 'RoomController@store');
+
+
+//Route::post('guardarMedicamentos', 'ProductController@store');
+
+Route::resource('product', 'ProductController');
+
+Route::resource('movement', 'MovementController');
+
+Route::post('/app/movement/store', 'MovementController@store');
+
+
+
+Route::get('sala/{id}', 'RoomController@getRoom');
+
+
 

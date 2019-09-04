@@ -12,6 +12,23 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'unidad', 'requiereDescartable', 'dosis', 'descartables',
+       'nombre', 'codigo', 'unidad', 'requiereDescartable', 'dosis', 'descartables',
     ];
+
+
+
+    public function stocks(){
+
+
+
+   	return $this->hasMany('App\Stock');
+   
+   }
+
+
+   public function details(){
+
+   	return $this->hasMany('App\Detail');
+   
+   }
 }

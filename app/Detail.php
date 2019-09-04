@@ -10,7 +10,7 @@ class Detail extends Model
 
 	protected $fillable = [
 
-       'cantidad', 'lote', 'vencimiento'
+       'cantidad', 'movement_id',  'product_id', 
     ];
 
 

@@ -13,6 +13,7 @@
         <style>
             html, body {
                 background-color: #fff;
+             /*   background-image:url({{url('bootstrap/dist/img/portal.JPG')}})*/
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -72,16 +73,14 @@
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
+                        
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel1
+                    Medicamentos
                 </div>
 
                 <div class="links">

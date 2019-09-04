@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'dni','name', 'email', 'password',
     ];
 
     /**
@@ -79,13 +79,13 @@ class User extends Authenticatable
      return false;
     }
 
-    public function room()
-    {
-        return $this
-            ->belongsTo('App\Room')
-            ->withTimestamps();
-            
-    }
+        public function rooms()
+        {
+            return $this
+                ->belongsToMany('App\Room')
+                ->withTimestamps();
+                
+        }
 
 
 

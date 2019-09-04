@@ -14,9 +14,33 @@ class Room extends Model
 
    public function users(){
 
-   	return $this->hasMany('App\User');
+   	return $this->belongsToMany('App\User')
+        ->withTimestamps();
    
    }
+
+   public function region()
+    {
+        return $this
+            ->belongsTo('App\Region')
+            ->withTimestamps();
+            
+    }
+
+    public function stocks(){
+
+    return $this->belongsToMany('App\Stock')
+        ->withTimestamps();
+   
+   }
+
+    public function movements(){
+
+    return $this->belongsToMany('App\Movement')
+        ->withTimestamps();
+   
+   }
+
 
 
 }

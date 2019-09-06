@@ -41,6 +41,13 @@ class Room extends Model
    
    }
 
+   public function ingresoVacunas(){
+
+    return $this->belongsToMany('App\ingresoVacunas')
+        ->withTimestamps();
+   
+   }
+
 
 
 }

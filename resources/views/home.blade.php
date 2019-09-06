@@ -187,7 +187,7 @@
           </a>
             <ul class="treeview-menu">
                <li><a href="{{ route('product.index') }}"> <i class="fa fa-circle-o"></i> Alta Productos </a></li>
-                <li><a href="{{ route('product.index') }}"> <i class="fa fa-circle-o"></i> Alta Stocks </a></li>
+                <li><a href="{{ route('ingresoVacuna.index') }}"> <i class="fa fa-circle-o"></i> Alta Stocks </a></li>
             </ul>
            
         </li>

@@ -31,4 +31,11 @@ class Product extends Model
    	return $this->hasMany('App\Detail');
    
    }
+
+
+   public function ingresoVacunasDetalle(){
+
+    return $this->hasMany('App\IngresoVacunasDetalle');
+   
+   }
 }

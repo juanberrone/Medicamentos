@@ -30,6 +30,10 @@ Route::post('/app/room/store', 'RoomController@store');
 
 Route::resource('product', 'ProductController');
 
+Route::resource('ingresoVacuna', 'IngresoVacunasController');
+
+Route::resource('programa', 'ProgramaController');
+
 Route::resource('movement', 'MovementController');
 
 Route::post('/app/movement/store', 'MovementController@store');
